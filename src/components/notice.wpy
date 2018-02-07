@@ -1,0 +1,195 @@
+<style lang="less">
+.noticeBox{
+
+  .movableArea{
+    width:99%;
+    height:90%;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:99997;
+    .movableView{
+      width:100rpx;
+      height:100rpx;
+      .notice{
+        width:60rpx;
+        height:60rpx;
+        border-radius:50rpx;
+        position: fixed;
+        background-color: #505B97;
+        box-shadow:0 0 30rpx rgba(10,33,67,1);
+        transition:all .4s .8s;
+        transform:scale(0.9) rotateZ(90deg);
+        opacity:0;
+        padding:20rpx;
+      }
+      .show_notice{
+        transform:scale(1) rotateZ(0);
+        opacity:1;
+      }
+    }
+  }
+  .shadow{
+    width:100%;
+    height:100%;
+    position: fixed;
+    top:0;
+    left:0;
+    background-color: rgba(0,0,0,.3);
+    z-index:99998;
+    transition:all .4s;
+    pointer-events:none;
+    opacity:0;
+  }
+  .show_shadow{
+    pointer-events:auto;
+    opacity:1;
+  }
+  .notice_content{
+    width:650rpx;
+    background-color: #fff;
+    border-radius:20rpx;
+    position: fixed;
+    top:200rpx;
+    left:50rpx;
+    z-index:99999;
+    transition:all .4s;
+    opacity:0;
+    transform:scale(.9);
+    pointer-events:none;
+    padding-bottom:30rpx;
+    overflow:hidden;
+    .topTitle{
+      width:100%;
+      height:90rpx;
+      background:linear-gradient(to top,#505B97,#505B97);
+      position: relative;
+      text-align:center;
+      box-shadow:0 0 20rpx rgab(88,99,157,.5);
+      .titleTxt{
+        line-height:90rpx;
+        font-size:35rpx;
+        color:#fff;
+      }
+      .gonggaoPic{
+        width:50rpx;
+        height:50rpx;
+        position: absolute;
+        top:20rpx;
+        left:40rpx;
+        padding-top:50rpx;
+        margin-top:-50rpx;
+        animation:noticeMove 4s ease-in-out infinite alternate;
+
+      }
+      @keyframes noticeMove{
+        0%{
+          transform:rotateZ(20deg);
+        }
+        7%{
+          transform:rotateZ(20deg);
+        }
+        93%{
+          transform:rotateZ(-20deg);
+        }
+        100%{
+          transform:rotateZ(-20deg);
+        }
+      }
+    }
+    .notice_contain{
+      width:100%;
+      padding:40rpx 40rpx 20rpx;
+      max-height:750rpx;
+      overflow:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-around;
+      .noticeItem{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        font-size:30rpx;
+        span{
+          margin-right:20rpx;
+          color:#081C3E;
+          margin-top:20rpx;
+        }
+        .itemPic{
+          width:50rpx;
+          height:50rpx;
+          border-radius:100%;
+          padding:30rpx;
+          box-shadow:0 0 20rpx rgba(60,104,172,.4);
+        }
+      }
+    }
+  }
+  .show_notice_content{
+    opacity:1;
+    transform:scale(1);
+    pointer-events:auto;
+  }
+}
+</style>
+<template>
+  <!-- 公告 -->
+  <view class="noticeBox">
+    <movable-area class="movableArea">
+      <movable-view x="{{noticeLeft}}" y="{{noticeTop}}" direction="all" class="movableView" >
+        <image src="http://ozo44qhh1.bkt.clouddn.com/ldeds.png" mode="aspectFill" class="notice {{show_noticeBtn?'show_notice':''}}" @tap="showNotice"></image>
+      </movable-view>
+    </movable-area>
+    <view class="shadow {{show_content?'show_shadow':''}}" @tap="closeNotice"></view>
+    <view class="notice_content {{show_content?'show_notice_content':''}}">
+      <view class="topTitle">
+        <text class="titleTxt">DEMO</text>
+        <image src="http://oyu2qzx2v.bkt.clouddn.com/lingdang.png" mode="aspectFill" class="gonggaoPic"></image>
+      </view>
+      <view class="notice_contain">
+        <view wx:for="{{notices}}" class="noticeItem" catchtap="itemtap({{item.url}})">
+          <image src="{{item.pic}}" mode="aspectFill" class="itemPic"></image>
+          <span>{{item.name}}</span>
+        </view>
+        <view wx:if="{{notices.length==0}}">暂无公告哦~</view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import * as apis from '../api/api.js'
+  export default class notice extends wepy.component {
+    props = {
+      notices:Object
+    }
+    components = {
+    }
+    data = {
+      noticeTop:900,
+      noticeLeft:500,
+      show_noticeBtn:false,
+      show_content:false
+    }
+    methods = {
+      closeNotice(){
+        this.show_noticeBtn=true
+        this.show_content=false
+        this.$apply()
+      },
+      showNotice(){
+        this.show_noticeBtn=false
+        this.show_content=true
+        this.$apply()
+      },
+      itemtap(url){
+        apis.navTo(url)
+      }
+    }
+    onLoad(){
+      this.show_noticeBtn=true
+      this.$apply()
+    }
+}
+</script>
+

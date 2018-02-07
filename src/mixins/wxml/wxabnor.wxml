@@ -1,0 +1,10 @@
+<template name="wxabnor">
+	<view class="abnor" wx:if="{{showabnor}}">
+    <view class="abnor__box">
+      <image class="abnor__image"  src="https://s10.mogucdn.com/p2/161213/upload_27e7gegi3f9acl5e05f3951if5855_514x260.png" mode="widthFix"></image>
+      <view class="abnor__text">暂无订单</view>
+      <view class="abnor__tip">可以去首页逛逛哦</view>
+      <view class="abnor__btn" wx:if="{{button}}" bindtap="emitAbnorTap">{{button}}</view>
+    </view>
+  </view>
+</template>

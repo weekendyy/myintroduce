@@ -1,0 +1,93 @@
+s<style lang="less">
+Page{
+  background:linear-gradient(to top,#4076C6,#3A63A2);
+}
+view{
+  box-sizing:border-box;
+}
+.bgP{
+  width:130%;
+  height:100%;
+  position: fixed;
+  top:0;
+  left:-100rpx;
+  animation:bgmove 40s infinite alternate;
+  transition:all 1s 1s;
+  transform:scale(1);
+  opacity:0;
+  @keyframes bgmove{
+    form{
+      transform:scale(1);
+    }
+    to{
+      transform:scale(1.3) rotateZ(20deg);
+    }
+  }
+}
+.show_page{
+  transform:scale(1);
+  opacity:.3;
+}
+</style>
+<template>
+  <image src='http://ozo44qhh1.bkt.clouddn.com/timg1d.jpg' mode="aspectFill" class="bgP {{show_page?'show_page':''}}"></image>
+  <notice :notices="notices"></notice>
+</template>
+<script>
+  import wepy from 'wepy'
+  import * as apis from '../api/api.js'
+  import notice from '../components/notice'
+  export default class index extends wepy.page {
+    config = {
+      navigationBarTitleText :'weekend',
+      navigationBarTextStyle :'white',
+      navigationBarBackgroundColor :'#3A63A2',
+      backgroundColor :'#3A63A2',
+      enablePullDownRefresh :false
+    }
+    props = {
+    }
+    components = {
+      notice:notice
+    }
+    data = { 
+      notices:[{
+        name:'对战DEMO',
+        pic:'http://ozo44qhh1.bkt.clouddn.com/e19413bd8d770feebdb3f7b54ebb8041.png',
+        url:'pages/fa/index'
+      },{
+        name:'答题DEMO',
+        pic:'http://ozo44qhh1.bkt.clouddn.com/datika.png',
+        url:'pages/questionanswer/questionAnswer'
+      }],
+      show_page:false
+    }
+    events = {
+    }
+    methods = {
+    }
+    async onShow(){
+      this.show_page=true
+      this.$apply()
+    }
+    async onLoad(e){
+    }
+    onShareAppMessage(e){
+      console.log("asdasdas")
+      if(e.target.dataset.value=="fightAgainst"){
+        return {
+          title: '我先定一个小目标，比方说先赢你一局比赛',
+          path: 'subPackages/questionBank/fightAgainst',
+          success:function(){
+            apis.navTo('pages/fa/fightAgainst')
+          }
+        }
+      }else if(e.target.dataset.value=="share"){
+        return {
+          title: '',
+          path: ''
+        }
+      }
+    }
+}
+</script>

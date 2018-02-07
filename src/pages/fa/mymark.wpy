@@ -1,0 +1,248 @@
+s<style lang="less">
+Page{
+  background-color: #090F1F;
+}
+view{
+  box-sizing:border-box;
+}
+.mymarkBox{
+  width:100%;
+  .myInfo{
+    width:100%;
+    padding:30rpx 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    transition:all .9s .5s;
+    opacity:0;
+    transform:scale(.5;);
+    .myIocn{
+      width:120rpx;
+      height:120rpx;
+      border-radius:100%;
+      margin-bottom:10rpx;
+    }
+    .nickName{
+      font-size:32rpx;
+      color:#fff;
+    }
+  }
+  .show_myInfo{
+    transform:scale(1);
+    opacity:1;
+  }
+  .markInfo{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    .myScoreItem{
+      dispaly:flex;
+      margin-top:40rpx;
+      padding:30rpx 0;
+      flex-direction:column;
+      align-items:center;
+      transition:all 1s .5s;
+      opacity:0;
+      transform:scale(.5);
+      .myrank{
+        color:#fff;
+        font-size:30rpx;
+      }
+      .myrank_number{
+        color:#28E586;
+        font-size:40rpx;
+        margin-top:20rpx;
+      }
+    }
+    .show_myScoreItem{
+      opacity:1;
+      transform:scale(1)
+    }
+  }
+  .cssCountdown{
+    width:100%;
+    height:400rpx;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:90rpx auto;
+    position: relative;
+    .round_leftBox{
+      width:400rpx;
+      height:400rpx;
+      background-color: #090F1F;
+      position: absolute;
+      border-radius:100%;
+      top:0;
+      left:50%;
+      margin-left:-200rpx;
+      clip:rect(0 200rpx 400rpx 0);
+      .round_left{
+        width:400rpx;
+        height:400rpx;
+        background-color: #28E586;
+        position: absolute;
+        border-radius:100%;
+        top:0;
+        left:0;
+        clip:rect(0 400rpx 400rpx 200rpx);
+        transition:all 1.5s linear 2.5s;
+        .head{
+          position: absolute;
+          bottom:0rpx;
+          left:50%;
+          width:15rpx;
+          height:15rpx;
+          border-radius:100%;
+          background-color: #fff;
+          display:block;
+        }
+      }
+    }
+    .round_rightBox{
+      width:400rpx;
+      height:400rpx;
+      background-color: #090F1F;
+      position: absolute;
+      border-radius:100%;
+      top:0;
+      left:50%;
+      margin-left:-200rpx;
+      clip:rect(0 400rpx 400rpx 200rpx);
+      .round_right{
+        width:400rpx;
+        height:400rpx;
+        background-color: #28E586;
+        position: absolute;
+        border-radius:100%;
+        top:0;
+        left:0;
+        clip:rect(0 400rpx 400rpx 200rpx);
+        transition:all 1.5s linear 1s;
+        .head{
+          position: absolute;
+          bottom:-60rpx;
+          left:50%;
+          margin-left:-60rpx;
+          width:120rpx;
+          height:120rpx;
+          border-radius:100%;
+          background-color: #fff;
+          display:block;
+        }
+      }
+    }
+    .round_cover{
+      width:370rpx;
+      height:370rpx;
+      background-color: #090F1F;
+      position: absolute;
+      border-radius:100%;
+      top:15rpx;
+      left:50%;
+      margin-left:-185rpx;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      .level{
+        color:#fff;
+        font-size:45rpx;
+        transition:all .5s 4s;
+        transform:scale(0.5);
+        opacity:0;
+      }
+      .level_number{
+        color:#28E586;
+        transition:all .5s 4s;
+        transform:scale(0.5);
+        opacity:0;
+        font-size:80rpx;
+        line-height:80rpx;
+      }
+      .show_round_cover{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="mymarkBox">
+    <view class="myInfo {{show_page?'show_myInfo':''}}">
+        <image src="{{myInfo.avatarUrl}}" mode="aspectFill" class="myIocn"></image>
+        <span class="nickName">{{myInfo.nickName}}</span>
+    </view>
+    <view class="markInfo">
+      <view class="myScoreItem {{show_page?'show_myScoreItem':''}}">
+        <view class="myrank">排名</view>
+        <view class="myrank_number">52</view>
+      </view>
+      <view class="myScoreItem {{show_page?'show_myScoreItem':''}}">
+        <view class="myrank">积分</view>
+        <view class="myrank_number">52</view>
+      </view>
+    </view>
+    <view class="cssCountdown" @tap="tap">
+      <view class="round_leftBox">
+        <view class="round_left" style="transform:rotateZ({{mylevel>0.5?(show_page?180*(mylevel-0.5)/0.5:0):0}}deg)">    
+          <!-- <span class="head"></span> -->
+        </view>
+      </view>
+      <view class="round_rightBox">
+        <view class="round_right" style="transform:rotateZ({{mylevel>=0.5?0:(show_page?180*mylevel/0.5-180:-180)}}deg)"> 
+          <!-- <span class="head"></span>  -->
+        </view>                                                                                        
+      </view>                                                                               
+      <view class="round_cover ">
+        <span class="level {{show_page?'show_round_cover':''}}">Level</span>
+        <span class="level_number {{show_page?'show_round_cover':''}}">27</span>
+      </view>                                                   
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import * as apis from '../../api/api.js'
+  export default class rankList_FA extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的战绩',
+      navigationBarTextStyle: 'white',
+      navigationBarBackgroundColor:'#090F1F',
+      backgroundColor:'#090F1F',
+      enablePullDownRefresh: false
+    }
+    props = {
+    }
+    components = {
+    }
+    data = {
+      myInfo:'',
+      mylevel:0.9,
+      show_page:false
+    }
+    events = {
+
+    }
+    methods = {
+      
+
+    }
+    async onShow(){
+      this.show_page=true
+      this.$apply()
+    }
+    async onLoad(e){
+      wx.getUserInfo({
+        success:(res)=>{
+          this.myInfo=res.userInfo
+          this.$apply()
+          console.log(res)
+        }
+      })
+    }
+}
+</script>

@@ -1,0 +1,571 @@
+<style lang="less">
+Page{
+  background:linear-gradient(to bottom,#086F5A,#086F5A);
+}
+view{
+  box-sizing:border-box;
+}
+.againstBox{
+  width:100%;
+  .fighterInfo{
+    width:100%;
+    position: relative;
+    .fighter{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      margin-top:30rpx;
+      .fighter_me{
+        padding:15rpx 30rpx;
+        max-width:250rpx;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        background-color: #419AC6;
+        border-top-right-radius:40rpx;
+        border-bottom-right-radius:40rpx;
+        .userPic{
+          width:100rpx;
+          height:100rpx;
+          border:6rpx solid #fff;
+          border-radius:100%;
+          background-color: #fff;
+        }
+        .user_name{
+          color:#fff;
+          font-size:25rpx;
+          width:100%;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap;
+          text-align:center;
+        }
+      }
+      .fighter_other{
+        background-color: #B73551;
+        border-top-right-radius:0;
+        border-bottom-right-radius:0;
+        border-top-left-radius:40rpx;
+        border-bottom-left-radius:40rpx;
+      }
+    }
+    .fighter_score{
+      margin-top:30rpx;
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      .score_me{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-end;
+        .myscore{
+          font-size:60rpx;
+          color:#fff;
+          margin-right:30rpx;
+        } 
+        .myscoreCut{
+          width:220rpx;
+          height:20rpx;
+          border-top-right-radius:10rpx;
+          border-bottom-right-radius:10rpx;
+          background:linear-gradient(to right,rgba(255,255,255,.2),#fff);
+        }
+      }
+      .score_other{
+        align-items:flex-start;
+        .otherscore{
+          margin-left:30rpx;
+        }
+        .othercut{
+          border-top-right-radius:0;
+          border-bottom-right-radius:0;
+          border-top-left-radius:10rpx;
+          border-bottom-left-radius:10rpx;
+          background:linear-gradient(to left,rgba(255,255,255,.2),#fff);
+        }
+      }
+      .waiting{
+        color:#fff;
+        margin-right:20rpx;
+      }
+    }
+    .question_tips{
+      width:100%;
+      height:100rpx;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position: absolute;
+      top:200rpx;
+      left:0;
+      transition:all .4s;
+      opacity:0;
+      transform:translateY(-30rpx);
+      .tips{
+        padding:10rpx 40rpx;
+        border-radius:40rpx;
+        color:#fff;
+        font-size:35rpx;
+        letter-spacing:10rpx;
+        display:block;
+        background-color: #76A098;
+      }
+    }
+    .show_tips{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .cssCountdown{
+      width:100%;
+      height:140rpx;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position: absolute;
+      top:30rpx;
+      left:0;
+      .countDown_num{
+        position: absolute;
+        width:100%;
+        height:100%;
+        line-height:140rpx;
+        text-align:center;
+        color:#fff;
+        font-size:60rpx;
+        background-color:rgba(0,0,0,0);
+      }
+      .round_leftBox{
+        width:120rpx;
+        height:120rpx;
+        background-color: #086F5A;
+        position: absolute;
+        border-radius:100%;
+        top:10rpx;
+        left:50%;
+        margin-left:-60rpx;
+        clip:rect(0 60rpx 120rpx 0);
+        .round_left{
+          width:120rpx;
+          height:120rpx;
+          background-color: #76A098;
+          position: absolute;
+          border-radius:100%;
+          top:0;
+          left:0;
+          clip:rect(0 60rpx 120rpx 0);
+        }
+        .countdown_left{
+          transform:rotateZ(180deg);
+        }
+      }
+      .round_rightBox{
+        width:120rpx;
+        height:120rpx;
+        background-color: #086F5A;
+        position: absolute;
+        border-radius:100%;
+        top:10rpx;
+        left:50%;
+        margin-left:-60rpx;
+        clip:rect(0 120rpx 120rpx 60rpx);
+        .round_right{
+          width:120rpx;
+          height:120rpx;
+          background-color: #76A098;
+          position: absolute;
+          border-radius:100%;
+          top:0;
+          left:0;
+          clip:rect(0 120rpx 120rpx 60rpx);
+        }
+        .countdown_right{
+          transform:rotateZ(180deg);
+        }
+      }
+      .round_cover{
+        width:90rpx;
+        height:90rpx;
+        background-color: #086F5A;
+        position: absolute;
+        border-radius:100%;
+        top:25rpx;
+        left:50%;
+        margin-left:-45rpx;
+      }
+    }
+  }
+  .questionBox{ 
+    width:100%;
+    padding:20rpx 30rpx;
+    .question{
+      color:#fff;
+      font-size:35rpx;
+      margin:50rpx 0;
+      transition:all .4s 1.4s;
+      opacity:0;
+      transform:scale(0.3);
+    }
+    .show_question{
+      transform:scale(1);
+        opacity:1;
+    }
+    .optionlist{
+      width:100%;
+      .optionItem{
+        width:100%;
+        padding:20rpx;
+        background-color: #fff;
+        border-radius:200rpx;
+        color:#086F5A;
+        font-size:40rpx;
+        margin:20rpx 0;
+        display:flex;
+        align-items:center;
+        line-height:40rpx;
+        transform:scale(.3);
+        opacity:0;
+        justify-content:space-between;
+        box-shadow:0 0 20rpx rgba(255,255,255,.5);
+        .correctIcon{
+          flex:0 0 40rpx;
+          height:40rpx;
+          background-color: #fff;
+          border-radius:100%;
+          margin-right:20rpx;
+        }
+        .wrongIcon{
+          margin-right:0rpx;
+          margin-left:20rpx;
+        }
+      }
+      .show_options{
+        transform:scale(1);
+        opacity:1;
+      }
+      .correctoption{
+        background-color: #65E260;
+        color:#fff;
+      }
+      .wrongoption{
+        color:#fff;
+        background-color: #F4777A;
+      }
+      .optionhover{
+        transform:scale(1.1);
+      }
+    }
+  }
+  .shareBox{
+    width:100%;
+    margin-top:30rpx;
+    .game_result{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      .game_result_icon{
+        width:300rpx;
+        height:300rpx;
+      }
+      .game_result_txt{
+        color:#fff;
+        font-size:70rpx;
+        font-weight:700;
+        text-shadow:0 0 30rpx rgba(255,222,0,1);
+      }
+      .gamefaile_txt{
+        color:#D5D5D5;
+      }
+    }
+    .gamefaile{
+      filter:grayscale(100%)
+    }
+    .shareBtns{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      margin-top:40rpx;
+      button{
+        background-color: #fff;
+        margin:0;
+        padding:0rpx 60rpx;
+        border-radius:50rpx;
+        margin:20rpx;
+        font-size:40rpx;
+        line-height:90rpx;
+        font-weight:600;
+        &::after{
+          content:none;
+        }
+      }
+      .btn1{
+        color:#086F5A;
+      }
+      .btn2{
+        background-color: #419AC6;
+        color:#fff;
+      }
+      .btn3{
+        background-color: #FFDE00;
+        color:#363103
+      }
+    }
+  }
+}
+.preGameStart{
+  position: fixed;
+  top:0;
+  left:0;
+  pointer-events:none;
+  width:100%;
+  height:100%;
+  display:flex;
+  .preImage_leftBox{
+    width:50%;
+    height:100%;
+    background-color: #419AC6;
+    display:flex;
+    align-items:center;
+    transition:all .5s ease-in;
+    transform:translateX(-705rpx);
+    .preImage_left{
+      width:100%;
+      height:100%;
+    }
+  }
+  .show_preImage_leftBox{
+    transform:translateX(0)
+  }
+  .preImage_rightBox{
+    width:50%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    background-color: #B73551;
+    transition:all .5s ease-in;
+    transform:translateX(705rpx);
+    .preImage_right{
+      width:100%;
+      height:100%;
+    }
+  }
+  .show_preImage_rightBox{
+    transform:translateX(0)
+  }
+}
+</style>
+<template>
+  <!-- 对战主体内容 -->
+  <view class="againstBox">
+    <!-- 上部 -->
+    <view class="fighterInfo">
+      <view class="fighter">
+        <view class="fighter_me">
+          <image src="{{user_info.avatarUrl}}" mode="aspectFill" class="userPic"></image>
+          <text class="user_name">{{user_info.nickName}}</text>
+        </view>
+        <view class="fighter_other fighter_me">
+          <image src="{{other_info?other_info.pic:'http://oyu2qzx2v.bkt.clouddn.com/whoo.png'}}" mode="aspectFill" class="userPic"></image>
+          <text class="user_name">{{other_info?other_info.nickName:''}}</text>
+        </view>
+      </view>
+      <view class="fighter_score">
+        <view class="score_me">
+          <text class="myscore">{{myscore}}</text>
+          <view class="myscoreCut"></view>
+        </view>
+        <view class="score_me score_other" wx:if="{{other_info}}">
+          <text class="myscore otherscore">{{otherscore}}</text>
+          <view class="myscoreCut othercut"></view>
+        </view>
+        <view class="waiting" wx:if="{{!other_info}}">等待对方加入...</view>
+      </view>
+      <!-- 第几题提示 -->
+      <view class="question_tips {{show_question?'show_tips':''}}" wx:if="{{gameStart}}"><text class="tips">第{{question_index+1}}题</text></view>
+      <!-- 倒计时 -->
+      <view class="cssCountdown" @tap="tap">
+        <view class="round_leftBox">
+          <view class="round_left {{countdown_go?'countdown_left':''}}"
+            style="transition:all {{countdown_go?countDown_time_index/2:0}}s linear {{countdown_go?countDown_time_index/2:0}}s;">
+          </view>
+        </view>
+        <view class="round_rightBox">
+          <view class="round_right {{countdown_go?'countdown_right':''}}"
+            style="transition:all {{countdown_go?countDown_time_index/2:1}}s linear;">
+          </view>
+        </view>
+        <view class="round_cover"></view>
+        <text class="countDown_num">{{countDown_time}}</text>
+      </view>
+    </view>
+    <!-- 下部 题目-->
+    <view class="questionBox" wx:if="{{gameStart&&!gameEnd}}">
+      <block wx:for="{{questionList}}" wx:if="{{idx==question_index}}" wx:for-index='idx'>
+        <view class="question {{show_question?'show_question':''}}">{{item.stem}}</view>
+        <!-- 题目选项 -->
+        <view class="optionlist">
+          <view wx:for="{{item.optionlist}}" class="optionItem {{myAnswer[idx]==index&&myAnswer[idx]==current_answer?'correctoption':(myAnswer[idx]==index&&myAnswer[idx]!=current_answer?'wrongoption':'')}} {{show_question?'show_options':''}}" style="transition:all {{myAnswer[idx]?.2:1}}s {{myAnswer[idx]?0:1.8}}s;" hover-start-time="0" hover-stay-time="0" hover-class="optionhover"
+          @tap="myAnswer({{index}},{{idx}})">
+            <!-- 我的正确答案 -->
+            <image wx:if="{{myAnswer[idx]==index&&myAnswer[idx]==current_answer}}" 
+            src="http://oyu2qzx2v.bkt.clouddn.com/correct_1.png" mode="aspectFill" class="correctIcon"></image>
+            <!-- 我的错误答案 -->
+            <image wx:if="{{myAnswer[idx]==index&&myAnswer[idx]!=current_answer}}"  
+            src="http://oyu2qzx2v.bkt.clouddn.com/wrong_1.png" mode="aspectFill" class="correctIcon"></image>
+            <!-- 占位块 -->
+            <span style="flex:0 0 60rpx;height:40rpx;" wx:if="{{!myAnswer[idx]||(myAnswer[idx]&&myAnswer[idx]!=index)}}"></span>
+            <!-- 选项 -->
+            <span>{{item}}</span>
+            <!-- 对方的正确答案 -->
+            <image wx:if="{{otherAnswe[idx]==index&&otherAnswe[idx]==current_answer}}" 
+            src="http://oyu2qzx2v.bkt.clouddn.com/correct_1.png" mode="aspectFill" class="correctIcon"></image>
+            <!-- 对方的错误答案 -->
+            <image wx:if="{{otherAnswe[idx]==index&&otherAnswe[idx]!=current_answer}}"  
+            src="http://oyu2qzx2v.bkt.clouddn.com/wrong_1.png" mode="aspectFill" class="correctIcon wrongIcon"></image>
+            <!-- 占位快 -->
+            <span style="flex:0 0 60rpx;height:40rpx;" wx:if="{{!otherAnswe[idx]||(otherAnswe[idx]&&otherAnswe[idx]!=index)}}"></span>
+          </view>
+        </view>
+      </block>
+    </view>
+    <!-- 比赛结束的展示 -->
+    <view class="shareBox" wx:if="{{gameStart&&gameEnd}}">
+      <view class="game_result {{isWin?'':'gamefaile'}}">
+        <image src="http://oyu2qzx2v.bkt.clouddn.com/champien.png" mode="widthFix" class="game_result_icon"></image>
+        <text class="game_result_txt {{isWin?'':'gamefaile_txt'}}">{{isWin?'挑战胜利':'挑战失败'}}</text>
+      </view>
+      <view class="shareBtns">
+        <button class="btn1" @tap="continueGame">继续挑战</button>
+        <button class="btn2" open-type="share">挑战其他好友</button>
+        <button class="btn3" open-type="share">炫耀成绩</button>
+      </view>
+    </view>
+  </view>
+  <!-- 比赛开始前动画 -->
+  <view class="preGameStart">
+    <view class="preImage_leftBox {{preGameStart?'show_preImage_leftBox':''}}"> 
+      <image src="http://oyu2qzx2v.bkt.clouddn.com/pk_1.png" mode="widthFix" class="preImage_left"></image>
+    </view>
+    <view class="preImage_rightBox {{preGameStart?'show_preImage_rightBox':''}}">
+      <image src="http://oyu2qzx2v.bkt.clouddn.com/pk_2.png" mode="widthFix" class="preImage_right"></image>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import * as apis from '../../api/api.js'
+  export default class fightAgainst extends wepy.page {
+    config = {
+      navigationBarTitleText: '对战',
+      navigationBarTextStyle: 'white',
+      navigationBarBackgroundColor:'#3DB89C',
+      backgroundColor:'#3DB89C',
+      enablePullDownRefresh: false
+    }
+    props = {
+    }
+    components = {
+    }
+    data = {
+      timer:'', //计时器
+      countdown_go:false,  //控制计时器停走
+      countDown_time:10,  //倒计时时间
+      countDown_time_index:10, //倒计时时间——不变
+      question_index:0, //当前题目index
+      questionList:[], //题目列表
+      user_info:'',   //用户信息
+      other_info:{nickName:'对手',pic:'http://oyu2qzx2v.bkt.clouddn.com/whoo.png'},  //对手信息
+      current_answer:'C',  //当前题目答案
+      myAnswer:[],  //我的答案
+      otherAnswe:[],//对手的答案
+      isChecked:[], //我是否选中
+      myscore:100,    //我的得分
+      otherscore:0,  //对方得分
+      gameStart:true,  //比赛是否开始
+      preGameStart:false, 
+      show_question:false,
+      gameEnd:false,    //比赛是否结束
+      isWin:true
+    }
+    events = {
+
+    }
+    methods = {
+      tap(){
+        clearInterval(this.timer)
+        this.preGameStart=true
+        this.$apply()
+        setTimeout(()=>{
+          this.preGameStart=false
+          this.show_question=true
+          this.$apply()
+          setTimeout(()=>{
+            this.countdown_go=true
+            this.countDown()
+          },1400)
+        },2000)
+      },
+      myAnswer(index,idx){
+        if(!this.isChecked[idx]){
+          this.isChecked[idx]=true
+          this.myAnswer[idx]=index
+          this.$apply()
+          console.log(this.myAnswer)
+        }
+        
+      },
+      continueGame(){
+        this.isWin=!this.isWin
+      }
+    }
+    onUnload(){
+      clearInterval(this.timer)
+    }
+    onHide(){
+      clearInterval(this.timer)
+    }
+    async onShow(){
+    }
+    async onLoad(e){
+      let self=this
+      this.questionList=wx.getStorageSync('_competitionQsList')
+      this.$apply()
+      wx.getUserInfo({
+        success:(res)=>{
+          self.user_info=res.userInfo
+          self.$apply()
+          console.log(res)
+        }
+      })
+    }
+    //倒计时
+    countDown(){
+      let self=this
+      self.timer=setInterval(()=>{
+        if(self.countDown_time<=0){  //倒计时为0
+          clearInterval(self.timer)
+          self.countDown_time=self.countDown_time_index
+          self.countdown_go=false
+          self.show_question=false
+          self.question_index++
+          self.$apply()
+          if(self.question_index>=self.questionList.length){
+            clearInterval(self.countDown)
+          }
+          setTimeout(()=>{  
+            self.show_question=true
+            self.$apply()
+            setTimeout(()=>{
+              this.countdown_go=true
+              self.$apply()
+              this.countDown()
+            },2800)
+          },1400)
+        }else{
+          self.countDown_time--
+          self.$apply()
+        }
+      },1000)
+    }
+}
+</script>

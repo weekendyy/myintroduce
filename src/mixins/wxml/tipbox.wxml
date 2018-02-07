@@ -1,0 +1,21 @@
+<template name="tipbox">
+	<view class="tipBox" >
+    <image src="{{tipsIcon}}" mode="widthFix" class="tipsIcon"></image>
+    <text class="tip_txt1">{{tips_txt}}</text>
+    <text class="tip_txt2">{{tips_desc}}</text>
+    <view style="margin-top:60px;">
+	<view class="GYLTitle">
+      <view class="icon1"></view>
+      <view class=" triangle-facing-right"></view>
+      <button class="rectxt readmore contact_kf_btn" open-type="contact">联系客服</button>
+      <view class="triangle-facing-left"></view>
+      <view class="icon1"></view>
+    </view>
+    <navigator class="GYLTitle copyrightbtm" url="/pages/index/index" open-type="redirect">
+      
+      <text class="rectxt readmore contact_kf_btn" style="color:#576b95">返回首页</text>
+   
+    </navigator>
+	</view>
+  </view>
+</template>

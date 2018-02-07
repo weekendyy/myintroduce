@@ -1,0 +1,453 @@
+s<style lang="less">
+Page{
+  background:linear-gradient(to bottom,#086F5A,#086F5A);
+}
+view{
+  box-sizing:border-box;
+}
+.fightAgainstIndexBox{
+  transition:all .3s;
+  opacity:0;
+  transform:scale(.8);
+  width:100%;
+  .userInfo{
+    width:100%;
+    padding:20rpx;
+    padding-bottom:30rpx;
+    display:flex;
+    align-items:flex-end;
+    background-color: #46897C;
+    justify-content:space-between;
+    .level{
+      flex:1;
+      display:flex;
+      align-items:center;
+      .level_txt{
+        font-size:35rpx;
+        color:#fff;
+      }
+      .level_bottom{
+        width:150rpx;
+        height:30rpx;
+        border-radius:30rpx;
+        background-color: #fff;
+        padding:5rpx;
+        margin-left:10rpx;
+        .level_progress{
+          width:80rpx;
+          height:100%;
+          border-radius:20rpx;
+          background-color: #26CFFD;
+          display:block;
+        }
+      }
+    }
+    .userBox{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      flex:0 0 250rpx;
+      .user_name{
+        font-size:33rpx;
+        color:#fff;
+        margin-bottom:10rpx;
+      }
+      .userIcon{
+        width:120rpx;
+        height:120rpx;
+        border:8rpx solid #fff;
+        border-radius:100%;
+      }
+    }
+    .integral{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      .integralIcon{  
+        width:60rpx;
+        height:60rpx;
+        box-shadow:0 0 30rpx rgba(255,255,255,.3);
+        border-radius:100%;
+      }
+      .integral_txt{
+        font-size:35rpx;
+        color:#fff;
+        margin-left:20rpx;
+      }
+    }
+  }
+  .options{
+    width:700rpx;
+    border-radius:30rpx;
+    margin:50rpx auto;
+    .mymilitaryExploits{
+      width:100%;
+      height:300rpx;
+      background-color: #DEEA67;
+      border-bottom:5rpx solid #fff;
+      border-top-right-radius:30rpx;
+      border-top-left-radius:30rpx;
+      transition:all .3s;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      position: relative;
+      background-image:url("http://oyu2qzx2v.bkt.clouddn.com/b9ea554c06ccde9c94ae02ea45f4560f.png");
+      background-size:150rpx 150rpx;
+      background-position:275rpx 50rpx;
+      background-repeat:no-repeat;
+      .tips{
+        width:200rpx;
+        height:60rpx;
+        position: absolute;
+        top:50rpx;
+        right:0;
+        border-top-left-radius:40rpx;
+        border-bottom-left-radius:40rpx;
+        background-color: #fff;
+        padding:10rpx;
+        .tipsBtn{ 
+          height:100%;
+          background-color: #fff;
+          padding:0;
+          margin:0;
+          width:100%;
+          line-height:40rpx;
+          display:flex;
+          align-items:center;
+          overflow:visible;
+          &::after{
+            content:none;
+          }
+          .tipsIcon{
+            width:40rpx;
+            height:40rpx;
+            border-radius:100%;
+            animation: tipsMove 1.5s infinite;
+            position: absolute;
+            top:0;
+            left:0;
+          }
+          @keyframes tipsMove{
+            0%{
+              transform:scale(1)
+            }
+            80%{
+              transform:scale(1)
+            }
+            90%{
+              transform:scale(1.3)
+            }
+            100%{
+              transform:scale(1)
+            }
+          }
+          span{
+            font-size:25rpx;
+            margin-left:55rpx;
+          }
+        }
+      }
+    }
+    .mymilitaryExploitsHover{
+      transform:scale(0.97);
+      box-shadow:0 0 30rpx rgba(255,255,255,.8)
+    }
+    .friends{
+      width:100%;
+      display:flex;
+      .rankList{
+        width:50%;
+        height:400rpx;
+        background-color: #89EA67;
+        border-top:5rpx solid #fff;
+        border-right:5rpx solid #fff;
+        border-bottom-left-radius:30rpx;
+        transition:all .3s;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        background-image:url("http://oyu2qzx2v.bkt.clouddn.com/paihangban.png");
+        background-size:150rpx 150rpx;
+        background-position:100rpx 100rpx;
+        background-repeat:no-repeat;
+
+      }
+      .rankListHover{
+        transform:scale(0.97);
+        box-shadow:0 0 30rpx rgba(255,255,255,.8)
+      }
+      .rankFriends{
+        width:50%;
+        height:400rpx;
+        background-color: #67CEEA;
+        border-left:5rpx solid #fff;
+        border-top:5rpx solid #fff;
+        transition:all .3s;
+        border-radius:0;
+        border-bottom-right-radius:30rpx;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        background-image:url("http://oyu2qzx2v.bkt.clouddn.com/duijuess.png");
+        background-size:150rpx 150rpx;
+        background-position:100rpx 100rpx;
+        background-repeat:no-repeat;
+        &::after{
+          content:none;
+        }
+      }
+      .rankFriendsHover{
+        transform:scale(0.97);
+        box-shadow:0 0 30rpx rgba(255,255,255,.8)
+      }
+    }
+    .zhanjiIcon{
+      width:150rpx;
+      height:150rpx;
+    }
+    .duijue{
+      width:70%;
+    }
+    .zhanji_txt{
+      color:#086F5A;
+      font-size:35rpx;
+      margin-top:180rpx;
+    }
+    .duijue_txt{
+      margin-top:180rpx;
+    }
+  }
+  .shareToFriends{
+    margin:50rpx auto;
+    width:200rpx;
+    height:80rpx;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:60rpx;
+    font-size:40rpx;
+    background-color: #fff;
+    box-shadow:0 0 30rpx rgba(255,255,255,.4);
+    color:#086F5A;
+    font-weight:600;
+    &::after{
+      content:none;
+    }
+
+  }
+}
+.show_page{
+  transform:scale(0.97);
+  opacity:1;
+}
+.login{
+  width:700rpx;
+  position: fixed;
+  top:80rpx;
+  left:50%;
+  margin-left:-350rpx;
+  padding:20rpx;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  background-color: #fff;
+  border-radius:30rpx;
+  border:7rpx solid #8EAFAA;
+  padding-top:80rpx;
+  padding-bottom:40rpx;
+  transition:all .3s;
+  transform:scale(1.3);
+  opacity:0;
+  pointer-events:none;
+  .dayItems{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin:10rpx;
+    .dayItem{
+      width:160rpx;
+      height:160rpx;
+      background-color: #46897C;
+      border-radius:100%;
+    }
+    .day_num{
+      font-size:30rpx;
+      color:#086F5A;
+      margin-top:20rpx;
+    }
+  }
+  .takepoint{
+    position: absolute;
+    width:250rpx;
+    height:70rpx;
+    border-radius:40rpx;
+    line-height:70rpx;
+    text-align:center;
+    bottom:-150rpx;
+    left:50%;
+    margin-left:-125rpx;
+    background-color: #fff;
+    color:#086F5A;
+    font-size:38rpx;
+    &::after{
+      content:none;
+    }
+    box-shadow:0 0 30rpx rgba(255,255,255,.4);
+    pointer-events:auto;
+  }
+  .login_title{
+    width:300rpx;
+    height:100rpx;
+    border-radius:50rpx;
+    background-color: #fff;
+    position: absolute;
+    top:-50rpx;
+    left:50%;
+    margin-left:-150rpx;
+    color:#46897C;
+    font-size:35rpx;
+    line-height:90rpx;
+    text-align:center;
+    border:7rpx solid #BFD33B;
+    box-shadow:0 0 30rpx rgba(93,106,8,.2)
+  }
+}
+.show_page{
+  transform:scale(1);
+  opacity:1;
+}
+</style>
+<template>
+ <view class="fightAgainstIndexBox {{show_page?'show_page':''}}">
+   <view class="userInfo">
+     <view class="level">
+       <span class="level_txt">Lv.1</span>
+       <view class="level_bottom"><span class="level_progress"></span></view>
+     </view>
+     <view class="userBox">
+       <text class="user_name">{{myInfo.nickName}}</text>
+       <image src="{{myInfo.avatarUrl}}" mode="aspectFill" class="userIcon"></image>
+     </view>
+     <view class="integral" @tap="show_loginfn">
+       <image src="http://oyu2qzx2v.bkt.clouddn.com/jifenww.png" mode="widthFix" class="integralIcon"></image>
+       <span class="integral_txt">215</span>
+     </view>
+   </view>
+   <view class="options">
+     <view class="mymilitaryExploits" hover-start-time='0' hover-stay-time='0' hover-class="mymilitaryExploitsHover" @tap="toMyMark">
+       <!-- <image src="http://oyu2qzx2v.bkt.clouddn.com/b9ea554c06ccde9c94ae02ea45f4560f.png" mode="widthFix" class="zhanjiIcon"></image> -->
+       <text class="zhanji_txt" >我的战绩</text>
+       <view class="tips">
+         <button class="tipsBtn" open-type="contact" session-from="against" hover-stop-propagation="true">
+           <image src="http://oyu2qzx2v.bkt.clouddn.com/whoo.png" mode="widthFix" class="tipsIcon"></image>
+           <span>对战小提示</span>
+         </button>
+       </view>
+     </view>
+     <view class="friends">
+       <view class="rankList" hover-start-time='0' hover-stay-time='0' hover-class="rankListHover" @tap="torankList">
+          <!-- <image src="http://oyu2qzx2v.bkt.clouddn.com/paihangban.png" mode="widthFix" class="zhanjiIcon"></image> -->
+          <text class="zhanji_txt">好友榜</text>
+       </view>
+       <button open-type="share" data-value="fightAgainst" class="rankFriends" hover-start-time='0' hover-stay-time='0' hover-class="rankFriendsHover">
+         <view style="width:90%;">
+          <!-- <image src="http://oyu2qzx2v.bkt.clouddn.com/duijuess.png" mode="widthFix" class="zhanjiIcon duijue"></image> -->
+         </view>
+         <text class="zhanji_txt duijue_txt">好友对决</text>
+       </button>
+     </view>
+   </view>
+   <button class="shareToFriends" data-value="share" open-type="share">分享</button>
+ </view>
+ <!-- 每日登陆奖励 -->
+<view class="login {{show_login?'show_page':''}}">
+  <view class="dayItems" wx:for="{{7}}">
+    <view class="dayItem"></view>
+    <span class="day_num">第{{index+1}}天</span>
+  </view>
+  <button class="takepoint" @tap="closeLogin">领取</button>
+  <view class="login_title">每日登陆奖励</view>
+</view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import * as apis from '../../api/api.js'
+  export default class fightAgainstIndex extends wepy.page {
+    config = {
+      navigationBarTitleText :'好友对战',
+      navigationBarTextStyle :'white',
+      navigationBarBackgroundColor :'#3DB89C',
+      backgroundColor :'#3DB89C',
+      enablePullDownRefresh :false
+    }
+    props = {
+    }
+    components = {
+    }
+    data = {
+      show_page:false,
+      show_login:false,
+      myInfo:''
+    }
+    events = {
+
+    }
+    methods = {
+      closeLogin(){
+        this.show_login=false
+        this.show_page=true
+        this.$apply()
+      },
+      show_loginfn(){
+        this.show_login=true
+        this.show_page=false
+        this.$apply()
+        // wx.playBackgroundAudio({
+        //   dataUrl: 'http://oyu2qzx2v.bkt.clouddn.com/59f1ba5578afe.mp3'
+        // })
+      },
+      torankList(){
+        apis.navTo('pages/fa/rankList_FA')
+      },
+      toMyMark(){
+        apis.navTo('pages/fa/mymark')
+      }
+    }
+    async onShow(){
+      
+    }
+    async onLoad(e){
+      this.show_login=true
+      this.$apply()
+      wx.getUserInfo({
+        success:(res)=>{
+          this.myInfo=res.userInfo
+          this.$apply()
+          console.log(res)
+        }
+      })
+    }
+    onShareAppMessage(e){
+      console.log("asdasdas")
+      if(e.target.dataset.value=="fightAgainst"){
+        return {
+          title: '我先定一个小目标，比方说先赢你一局比赛',
+          path: 'subPackages/questionBank/fightAgainst',
+          success:function(){
+            apis.navTo('pages/fa/fightAgainst')
+          }
+        }
+      }else if(e.target.dataset.value=="share"){
+        return {
+          title: '',
+          path: ''
+        }
+      }
+    }
+}
+</script>

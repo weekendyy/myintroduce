@@ -1,0 +1,4 @@
+<template name="loadingmore">
+	<view class="infinite-status-prompt {{ onReachBottomAble ? '' : 'LoadEndClass' }}" >加载中...请稍等...</view>
+	<view class="infinite-status-prompt {{ onLoadAll && !onReachBottomAble ? '' : 'LoadEndClass' }}" >你已经摸到底了..没有更多了</view>
+</template>

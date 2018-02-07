@@ -1,0 +1,230 @@
+<style lang="less">
+Page{
+
+}
+view{
+  box-sizing:border-box;
+}
+.bgRanklist{
+  width:100%;
+  height:100%;
+  position: fixed;
+  animation: bgmove 10s infinite alternate;
+  transform:scale(1);
+  transition:all 1s 1s;
+  opacity:0;
+}
+@keyframes bgmove{
+  0%{
+    transform:scale(1) rotateZ(0);
+  }
+  50%{
+    transform:scale(1.4) rotateZ(10deg);
+  }
+  100%{
+    transform:scale(1.4) rotateZ(-10deg);
+  }
+}
+.show_bgRanklist{
+  opacity:1;
+}
+.rankList{
+  width:100%;
+  .topranklist{
+    transform:translateY(-300rpx);
+    transition:all .4s .5s;
+    width:100%;
+    padding:40rpx 0 30rpx 0;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-around;
+    background:linear-gradient(to top left,#053B31,#17A289);
+    box-shadow:0 0 30rpx rgba(7,71,59,.6);
+    .myRank{
+      color:#fff;
+      flex:1;
+      display:flex;
+      justify-content:center;
+      align-items:baseline;
+      font-size:30rpx;
+      span{
+        font-size:50rpx;
+        margin-right:10rpx;
+      }
+    }
+    .myInfo{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      color:#fff;
+      .myPic{
+        width:150rpx;
+        height:150rpx;
+        border-radius:100%;
+        box-shadow:0 0 30rpx rgba(3,33,28,.9);
+        margin-top:10rpx;
+      }
+    }
+    .myPoint{
+      flex:1;
+      display:flex;
+      justify-content:center;
+      color:#fff;
+      align-items:flex-end;
+      font-size:30rpx;
+      .integralIcon{
+        width:50rpx;
+        height:50rpx;
+        border-radius:100%;
+        margin-right:10rpx;
+
+      }
+    }
+  }
+  .show_page{
+    transform:translateY(0)
+  }
+  .rankListBox{
+    width:100%;    
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:20rpx;
+    .rankItem{
+      width:710rpx;
+      padding:40rpx 10rpx 40rpx 30rpx;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin:10rpx 0;
+      box-shadow:0 0 20rpx rgba(10,85,71,.4);
+      border-radius:10rpx;
+      background-color: rgba(3,155,131,1);
+      transform:translateX(-750rpx);
+      opacity:0;
+      .userIndex{
+        font-size:35rpx;
+        color:#fff;
+        flex:0 0 100rpx;
+        display:flex;
+        justify-content:flex-end;
+        font-weight:600;
+        margin-right:20rpx;
+        padding-right:40rpx;
+        box-sizing:border-box;
+      }
+      .firstIcon{
+        width:100rpx;
+        height:100rpx;
+        margin-right:20rpx;
+      }
+      .itemPic{
+        flex:0 0 80rpx;
+        height:80rpx;
+        border-radius:100%;
+        box-shadow:0 0 15rpx rgba(5,63,52,.8);
+        margin-right:40rpx;
+      }
+      .userName{
+        flex:0 0 300rpx;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        color:#fff;
+      }
+      .userPoint{
+        color:#fff;
+        flex:1;
+        display:flex;
+        justify-content:flex-end;
+        padding-right:30rpx;
+        font-size:40rpx;
+        font-weight:500;
+      }
+    }
+    .show_ranklist{
+      opacity:1;
+      transform:translateX(0);
+    }
+    .itemHover{
+      transform:scale(0.97);
+    }
+  }
+}
+</style>
+<template>
+  <image src="http://oyu2qzx2v.bkt.clouddn.com/61b8ddaa63f868d1f75fb1558f205.jpg" mode='aspectFill' class="bgRanklist {{show_page?'show_bgRanklist':''}}"></image>
+  <view class="rankList">
+    <view class="topranklist {{show_page?'show_page':''}}">
+      <view class="myRank"><span>2</span>Rd</view>
+      <view class="myInfo">
+        <span>{{myInfo.nickName}}</span>
+        <image src="{{myInfo.avatarUrl}}" mode="aspectFill" class="myPic"></image>
+      </view>
+      <view class="myPoint">
+        <image src="http://oyu2qzx2v.bkt.clouddn.com/jifenww.png" mode="widthFix" class="integralIcon"></image>
+        <span>251</span>
+      </view>
+    </view>
+    <view class="rankListBox">
+      <view class="rankItem {{show_page?'show_ranklist':''}}" wx:for="{{ranklist}}" hover-class="itemHover" hover-start-time="0" hover-stay-time="0" style="transition:all .5s {{1.2+index*0.2}}s;" catchtransitionend="show_page_donefn({{index}})">
+        <span class="userIndex" wx:if="{{index!=0&&index!=1&&index!=2}}">{{index+1}}</span>
+        <image wx:if="{{index==0}}" src="http://oyu2qzx2v.bkt.clouddn.com/first.png" mode="widthFix" class="firstIcon"></image>
+        <image wx:if="{{index==1}}" src="http://oyu2qzx2v.bkt.clouddn.com/second.png" mode="widthFix" class="firstIcon"></image>
+        <image wx:if="{{index==2}}" src="http://oyu2qzx2v.bkt.clouddn.com/third.png" mode="widthFix" class="firstIcon"></image>
+        <image src="http://oyu2qzx2v.bkt.clouddn.com/userIcon3.jpg" mode="aspectFill" class="itemPic"></image>
+        <text class="userName">用户名称</text>
+        <view class="userPoint">168</view>
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import * as apis from '../../api/api.js'
+  export default class rankList_FA extends wepy.page {
+    config = {
+      navigationBarTitleText: '好友榜',
+      enablePullDownRefresh: false
+    }
+    props = {
+    }
+    components = {
+    }
+    data = {
+      myInfo:'',
+      show_page:false,
+      show_page_done:false,
+      ranklist:[1,1,1,1,1,1,1]
+    }
+    events = {
+
+    }
+    methods = {
+      show_page_donefn(index){
+        if(index==this.ranklist.length-1){
+          this.show_page_done=true
+          this.$apply()
+          console.log(index)
+        }
+      }
+    }
+    async onShow(){
+     
+    }
+    async onLoad(e){
+      wx.getUserInfo({
+        success:(res)=>{
+          this.myInfo=res.userInfo
+          this.$apply()
+          console.log(res)
+        }
+      })
+      console.log(this.show_page+"第一个参数")
+      this.show_page=true
+      this.$apply()
+      console.log(this.show_page_done+"第二个参数")
+    }
+}
+</script>

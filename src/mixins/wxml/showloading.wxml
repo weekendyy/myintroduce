@@ -1,0 +1,7 @@
+<template name="showloading">
+	<view class="loading" wx:if="{{loadingModal}}">
+	    <view class="loading__image--mall loading__image loading__box">
+	        <view class="loading__slip--mall loading__slip loading__box"></view>
+	      </view>
+	</view>
+</template>

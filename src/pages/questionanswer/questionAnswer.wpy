@@ -1,0 +1,387 @@
+<style lang="less">
+Page{
+  width:100%;
+  height:100%;
+}
+.bg{
+  width:100%;
+  height:100%;
+  position: fixed;
+  top:0;
+  left:0;
+  pointer-events:none;
+  opacity:.2;
+}
+view,button{
+  box-sizing:border-box;
+  color:#fff;
+}
+.competitionDetailBox{
+  background-color: #3DB89C;
+  width:100%;
+  height:100%;
+  overflow-x:hidden;
+  overflow-y:hidden;
+  .countDown_time{
+    margin-top:10px;
+    width:100%;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20rpx;
+    color:#fff;
+    position: absolute;
+    top:0;
+    left:0;
+    .count_question{
+      flex:0 0 210rpx;
+      display:flex;
+      height:100rpx;
+      align-items:baseline;
+      justify-content:center;
+      color:#053E31;
+      background:linear-gradient(to right,rgba(255,255,255,.9),rgba(255,255,255,0));
+      border-top-left-radius:50rpx;
+      border-bottom-left-radius:50rpx;
+      padding-top:10rpx;
+      transition:all .4s .6s;
+      opacity:0;
+      transform:translateX(50rpx);
+      span{
+        margin:0 20rpx;
+      }
+      .myScore{
+        font-size:50rpx;
+      }
+    }
+    .count_question_1{
+      transition:all .4s .6s;
+      transform:translateX(-50rpx);
+      opacity:0;
+      border-top-right-radius:50rpx;
+      border-bottom-right-radius:50rpx;
+      border-top-left-radius:0rpx;
+      border-bottom-left-radius:0rpx;
+      background:linear-gradient(to left,rgba(255,255,255,.9),rgba(255,255,255,0));
+    }
+    .show_count_question{
+      transform:translateX(0);
+      opacity:1;
+    }
+  }
+  .question_countTips{
+    width:200rpx;
+    height:80rpx;
+    font-size:30rpx;
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    background-color: #fff;
+    box-shadow:0 0 20rpx rgba(5,75,59,.5);
+    border-radius:40rpx;
+    color:#444;
+    transition:all .3s; 
+    position: absolute;
+    left:50%;
+    margin-left:-100rpx;
+    top:30rpx;
+    padding-bottom:20rpx;
+    z-index:99999;
+    span{
+      color:#444;
+      font-size:50rpx;
+      margin:0 20rpx;
+    }
+  }
+  .swiper_question{
+    height:1100rpx;
+    transition:all .4s 1.3s;
+    transform:scale(.9);
+    opacity:0;
+    .questionCard{
+      width:710rpx;
+      padding:80rpx 0 50rpx;
+      margin:20rpx auto;
+      border-radius:20rpx;
+      background-color: #fff;
+      transform:scale(1);
+      transition:all .3s;
+      margin-top:70rpx;
+      opacity:1;
+      position: relative;
+      .question{
+        width:100%;
+        padding:0rpx 20rpx 20rpx;
+        color:#000;
+        font-size:37rpx;
+        transition:all 1s;
+        transform:scale(1);
+        word-wrap:break-word;
+        opacity:1;
+        display:flex;
+      }
+      .opation{
+        width:100%;
+        padding: 0 20rpx;
+        display:flex;
+        flex-direction:column;
+        transition:all .6s;
+        transform:scale(1);
+        opacity:1;
+        .opationItemBox{
+          transition:all .2s;
+          margin:10rpx 0;
+          background-color: #F4F4F4;
+          padding:20rpx;
+          border-radius:90rpx;
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          .opationItem{
+            color:#444444;
+            font-size:29rpx;
+            display:block;
+            flex:1;
+            padding:0 20rpx;
+          }
+        }
+        .optionHover{
+          transform:scale(1.05);
+        }
+      }
+    }
+  }
+  .show_swiper_question{
+    transform:scale(1);
+    opacity:1;
+  }
+  .submitBtn{
+    position:fixed;
+    width:250rpx;
+    height:80rpx;
+    line-height:80rpx;
+    text-align:center;
+    bottom:50rpx;
+    left:50%;
+    margin-left:-125rpx;
+    color:#51C0A6;
+    font-size:33rpx;
+    border-radius:40rpx;
+    box-shadow:0 0 20rpx rgba(5,75,59,.5);
+    transition:all .4s;
+    transform:scale(0.8);
+    opacity:0;
+    &::after{
+      content:none
+    }
+  }
+  .show_submitBtn{
+    transform:scale(1);
+    opacity:1;
+  }
+  .morequestion{
+    width:50rpx;
+    height:50rpx;
+    padding:15rpx;
+    border-radius:100%;
+    position:fixed;
+    bottom:50rpx;
+    right:60rpx;
+    background-color: #fff;
+    box-shadow:0 0 20rpx rgba(5,75,59,.5);
+    transition:all .4s ;
+    transform:scale(0.8);
+    opacity:0;
+  }
+  .show_morequestion{
+    transform:scale(1);
+    opacity:1;
+  }
+  .shadow{
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    position: fixed;
+    top:0;
+    left:0;
+    background:rgba(100,100,100,0);
+    transition:all .3s;
+  }
+  .show_shadow{
+    background:rgba(100,100,100,.2);
+    pointer-events:auto;
+  }
+  .allQuestions{
+    position: fixed;
+    bottom:150rpx;
+    right:25rpx;
+    width:700rpx;
+    height:85%;
+    background-color: #678681;
+    border-radius:10rpx;
+    transition:all .4s;
+    transform:scale(0.8);
+    pointer-events:none;
+    opacity:0;
+    padding:25rpx;
+    overflow:auto;
+    flex-wrap:wrap;
+    .qsItems{
+      float:left;
+      background-color: #fff;
+      color:#48BDA2;
+      width:100rpx;
+      height:100rpx;
+      border-radius:50rpx;
+      line-height:100rpx;
+      text-align:center;
+      margin:15rpx;
+      font-size:43rpx;
+    } 
+  }
+  .show_allQuestions{
+    opacity:.95;
+    transform:scale(1);
+    pointer-events:auto;
+  }
+}
+</style>
+<template>
+  <image src="http://oyu2qzx2v.bkt.clouddn.com/cpBg.jpg" mode="aspectFill" class="bg"></image>
+  <view class="competitionDetailBox">
+    <view style="height:75px;margin-top:20rpx;"></view>
+    <view class="countDown_time" style="justify-content:space-between">
+      <view class="count_question count_question_1 {{show_page?'show_count_question':''}}">
+        <text class="maScore">得分</text>
+        <span class="myScore">{{myScore}}</span>
+      </view>
+      <view class="count_question {{show_page?'show_count_question':''}}">
+        <text>共</text>
+        <span class="myScore">{{questionList.length}}</span>
+        <text>题</text>
+      </view>
+    </view>
+    <block>
+      <swiper class="swiper_question {{show_page?'show_swiper_question':''}}" current="{{current>0?1:current}}" @change="change">
+        <block wx:for="{{questionList}}" wx:for-index="idx" >
+          <swiper-item wx:if="{{current>=idx-1 && current<=idx+1}}">
+            <view class="question_countTips">第<span>{{idx+1}}</span>题</view>
+            <view class="questionCard"> 
+              <view class="question">
+                <span>{{item.stem}}</span>
+              </view>
+              <view class="opation">
+                <block wx:for="{{item.optionlist}}">
+                  <view class="opationItemBox" style="padding-right:45rpx;" hover hover-class="optionHover" hover-stay-time='0' hover-start-time='0' @tap="myAnswer({{index}},{{idx}})" style="background-color:{{myAnswer[idx]==index?'rgba(255,152,0,.5)':''}}">
+                    <view class="opationItem" >
+                     {{item}}
+                    </view>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </block>
+    <button class="submitBtn {{show_page?'show_submitBtn':''}}" style="filter:blur({{show_allQuestions?2:0}}px)" @tap="checkMyAnswer">提交答案</button>
+    <image src="{{show_allQuestions?'http://oyu2qzx2v.bkt.clouddn.com/close%20%281%29.png':'http://oyu2qzx2v.bkt.clouddn.com/remind.png'}}" mode="aspectFill" class="morequestion {{show_page?'show_morequestion':''}}" @tap="showAllQuestions"></image>
+    <view class="shadow {{show_allQuestions?'show_shadow':''}}" @tap="closeAllQuestion"></view>
+    <view class="allQuestions {{show_allQuestions?'show_allQuestions':''}}">
+      <span class="qsItems" wx:for="{{questionList}}" @tap="questionIndex({{index}})" style="background-color:{{myAnswer[index]?'#FFCB7F':''}}">{{index+1}}</span>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import * as apis from '../../api/api.js'
+  import _size from 'lodash.size'
+  import _isEmpty from 'lodash.isempty'
+  export default class questionAnswer extends wepy.page {
+    config = {
+      navigationBarTitleText: '',
+      navigationBarTextStyle: 'white',
+      navigationBarBackgroundColor:'#3DB89C',
+      backgroundColor:'#3DB89C',
+      enablePullDownRefresh: false
+    }
+    props = {
+    }
+    components = {
+    }
+    data = {
+      myScore:0,
+      questionList:[],
+      myAnswer:[],
+      show_page:false,
+      show_allQuestions:false,
+      current:0,
+      id:574854975
+    }
+    events = {
+
+    }
+    methods = {
+      myAnswer(index,idx){
+        this.myAnswer[idx]=index
+        this.$apply()
+      },
+      showAllQuestions(){
+        this.show_allQuestions = !this.show_allQuestions
+        this.$apply()
+        console.log("ddd")
+      },
+      closeAllQuestion(){
+        this.show_allQuestions=false
+        this.$apply()
+      },
+      questionIndex(index){
+        this.current=index
+        this.show_allQuestions=false
+        this.$apply()
+      },
+      change(e){
+        console.log(e.detail.current+'有显示的下标')
+        console.log(this.current+'真实题目下标')
+        if(this.current!=0){
+          this.current=this.current+e.detail.current-1
+          this.$apply()
+        }else{
+          this.current=this.current+1
+          this.$apply()
+        }
+      },
+      checkMyAnswer(){
+        apis.navTo('subPackages/questionBank/questionAnswerResult?myAnswer='+this.myAnswer+'&id='+this.id)
+      }
+    }
+    onShow(){
+      this.show_page=true
+      this.$apply()
+    }
+    onHide(){
+    }
+    onUnload(){
+    }
+    onError(){
+    }
+    async onLoad(e){
+      let self = this
+      let res = await apis.apiFetch('https://xcx.zhikemiao.com/index.php?s=sq_questionlist#!FakeAuthorization', {chapter_id: 574854975});
+      if(res.errcode==0){
+        let question  = res.errmsg.data
+        let question1 = []
+        question1 = question1.concat(question)
+        self.questionList=question1;
+        for(let i=0;i<this.questionList.length;i++){
+          if(!this.myAnswer[i]){
+            this.myAnswer[i]=0
+            this.$apply()
+          }
+        }
+        self.$apply()
+      }
+    }
+}
+</script>
