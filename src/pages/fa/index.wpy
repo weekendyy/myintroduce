@@ -1,6 +1,6 @@
 s<style lang="less">
 Page{
-  background:linear-gradient(to bottom,#086F5A,#086F5A);
+  background:linear-gradient(to bottom,#46897C,#46897C);
 }
 view{
   box-sizing:border-box;
@@ -381,8 +381,8 @@ view{
     config = {
       navigationBarTitleText :'好友对战',
       navigationBarTextStyle :'white',
-      navigationBarBackgroundColor :'#3DB89C',
-      backgroundColor :'#3DB89C',
+      navigationBarBackgroundColor :'#46897C',
+      backgroundColor :'#46897C',
       enablePullDownRefresh :false
     }
     props = {
