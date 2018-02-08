@@ -11,13 +11,15 @@
     .movableView{
       width:100rpx;
       height:100rpx;
+      top:800rpx;
+      left:600rpx;
       .notice{
         width:60rpx;
         height:60rpx;
         border-radius:50rpx;
         position: fixed;
         background-color: #505B97;
-        box-shadow:0 0 30rpx rgba(10,33,67,1);
+        box-shadow:0 0 30rpx rgba(10,33,67,.7);
         transition:all .4s .8s;
         transform:scale(0.9) rotateZ(90deg);
         opacity:0;
@@ -137,7 +139,7 @@
   <!-- 公告 -->
   <view class="noticeBox">
     <movable-area class="movableArea">
-      <movable-view x="{{noticeLeft}}" y="{{noticeTop}}" direction="all" class="movableView" >
+      <movable-view direction="all" class="movableView" >
         <image src="http://ozo44qhh1.bkt.clouddn.com/ldeds.png" mode="aspectFill" class="notice {{show_noticeBtn?'show_notice':''}}" @tap="showNotice"></image>
       </movable-view>
     </movable-area>
@@ -167,8 +169,6 @@
     components = {
     }
     data = {
-      noticeTop:900,
-      noticeLeft:500,
       show_noticeBtn:false,
       show_content:false
     }
