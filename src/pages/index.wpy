@@ -15,6 +15,7 @@ view{
   transition:all 1s 1s;
   transform:scale(1);
   opacity:0;
+  z-index:-10;
   @keyframes bgmove{
     form{
       transform:scale(1);
@@ -26,11 +27,50 @@ view{
 }
 .show_page{
   transform:scale(1);
-  opacity:.3;
+  opacity:1;
+}
+.loading_view{
+  width:100%;
+  height:100%;
+  position: fixed;
+  top:0;
+  left:0;
+  background-color: #5387AE;
+  transition:all 1s 3s;
+  z-index:99998;
+}
+.hide_loading{
+  opacity:0;
+  pointer-events:none;
+}
+.loading{
+  width:100%;
+  height:100%;
+  position: fixed;
+  top:0;
+  left:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+  pointer-events:none;
+  .loadingPic{
+    width:180rpx;
+    height:180rpx;
+    border-radius:100%;
+    transition:all 1s 3s;
+  }
+  .show_loadingPic{
+    transform:translate(0,-499rpx) scale(.8);
+  }
 }
 </style>
 <template>
-  <image src='http://ozo44qhh1.bkt.clouddn.com/timg1d.jpg' mode="aspectFill" class="bgP {{show_page?'show_page':''}}"></image>
+  <image src='http://ozo44qhh1.bkt.clouddn.com/79553cd09497490f47dd4c202f1dc6c8.jpg' mode="aspectFill" class="bgP {{show_page?'show_page':''}}"></image>
+  <view class="loading">
+    <image src="http://oyu2qzx2v.bkt.clouddn.com/userIcon4.jpg" mode="widthFix" class="loadingPic" style="transform:translate(0,-{{height/2-(90/pxradio)}}px) scale(.8);"></image>
+  </view>
+  <view class="loading_view {{show_page?'hide_loading':''}}"></view>
   <notice :notices="notices"></notice>
 </template>
 <script>
@@ -41,8 +81,8 @@ view{
     config = {
       navigationBarTitleText :'weekend',
       navigationBarTextStyle :'white',
-      navigationBarBackgroundColor :'#3A63A2',
-      backgroundColor :'#3A63A2',
+      navigationBarBackgroundColor :'#5387AE',
+      backgroundColor :'#5387AE',
       enablePullDownRefresh :false
     }
     props = {
@@ -60,7 +100,9 @@ view{
         pic:'http://ozo44qhh1.bkt.clouddn.com/datika.png',
         url:'pages/questionanswer/questionAnswer'
       }],
-      show_page:false
+      show_page:false,
+      height:null,
+      pxradio:null
     }
     events = {
     }
@@ -71,6 +113,14 @@ view{
       this.$apply()
     }
     async onLoad(e){
+      let self = this
+      wx.getSystemInfo({
+        success: function(res) {
+          self.height=res.windowHeight 
+          self.pxradio=750/res.windowWidth
+          self.$apply()
+        }
+      })
     }
     onShareAppMessage(e){
       console.log("asdasdas")
