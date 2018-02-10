@@ -20,7 +20,8 @@ export default class extends wepy.app {
       'pages/fa/fightAgainst',
       'pages/fa/mymark',
       'pages/fa/rankList_FA',
-      'pages/questionanswer/questionAnswer'
+      'pages/questionanswer/questionAnswer',
+      'pages/music/music'
     ],
     window: {
       backgroundTextStyle: 'light',

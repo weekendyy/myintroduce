@@ -77,6 +77,59 @@ view{
       }
     }
   }
+  .tips{
+    width:200rpx;
+    height:60rpx;
+    position: absolute;
+    top:350rpx;
+    right:25rpx;
+    border-top-left-radius:40rpx;
+    border-bottom-left-radius:40rpx;
+    background-color: #fff;
+    padding:10rpx;
+    z-index:100;
+    .tipsBtn{ 
+      height:100%;
+      background-color: #fff;
+      padding:0;
+      margin:0;
+      width:100%;
+      line-height:40rpx;
+      display:flex;
+      align-items:center;
+      overflow:visible;
+      &::after{
+        content:none;
+      }
+      .tipsIcon{
+        width:40rpx;
+        height:40rpx;
+        border-radius:100%;
+        animation: tipsMove 1.5s infinite;
+        position: absolute;
+        top:0;
+        left:0;
+      }
+      @keyframes tipsMove{
+        0%{
+          transform:scale(1)
+        }
+        80%{
+          transform:scale(1)
+        }
+        90%{
+          transform:scale(1.3)
+        }
+        100%{
+          transform:scale(1)
+        }
+      }
+      span{
+        font-size:25rpx;
+        margin-left:55rpx;
+      }
+    }
+  }
   .options{
     width:700rpx;
     border-radius:30rpx;
@@ -98,58 +151,6 @@ view{
       background-size:150rpx 150rpx;
       background-position:275rpx 50rpx;
       background-repeat:no-repeat;
-      .tips{
-        width:200rpx;
-        height:60rpx;
-        position: absolute;
-        top:50rpx;
-        right:0;
-        border-top-left-radius:40rpx;
-        border-bottom-left-radius:40rpx;
-        background-color: #fff;
-        padding:10rpx;
-        .tipsBtn{ 
-          height:100%;
-          background-color: #fff;
-          padding:0;
-          margin:0;
-          width:100%;
-          line-height:40rpx;
-          display:flex;
-          align-items:center;
-          overflow:visible;
-          &::after{
-            content:none;
-          }
-          .tipsIcon{
-            width:40rpx;
-            height:40rpx;
-            border-radius:100%;
-            animation: tipsMove 1.5s infinite;
-            position: absolute;
-            top:0;
-            left:0;
-          }
-          @keyframes tipsMove{
-            0%{
-              transform:scale(1)
-            }
-            80%{
-              transform:scale(1)
-            }
-            90%{
-              transform:scale(1.3)
-            }
-            100%{
-              transform:scale(1)
-            }
-          }
-          span{
-            font-size:25rpx;
-            margin-left:55rpx;
-          }
-        }
-      }
     }
     .mymilitaryExploitsHover{
       transform:scale(0.97);
@@ -338,16 +339,16 @@ view{
        <span class="integral_txt">215</span>
      </view>
    </view>
+     <view class="tips">
+       <button class="tipsBtn" open-type="contact" hover-stop-propagation="true">
+         <image src="http://oyu2qzx2v.bkt.clouddn.com/whoo.png" mode="widthFix" class="tipsIcon"></image>
+         <span>对战小提示</span>
+       </button>
+     </view>
    <view class="options">
      <view class="mymilitaryExploits" hover-start-time='0' hover-stay-time='0' hover-class="mymilitaryExploitsHover" @tap="toMyMark">
        <!-- <image src="http://oyu2qzx2v.bkt.clouddn.com/b9ea554c06ccde9c94ae02ea45f4560f.png" mode="widthFix" class="zhanjiIcon"></image> -->
        <text class="zhanji_txt" >我的战绩</text>
-       <view class="tips">
-         <button class="tipsBtn" open-type="contact" session-from="against" hover-stop-propagation="true">
-           <image src="http://oyu2qzx2v.bkt.clouddn.com/whoo.png" mode="widthFix" class="tipsIcon"></image>
-           <span>对战小提示</span>
-         </button>
-       </view>
      </view>
      <view class="friends">
        <view class="rankList" hover-start-time='0' hover-stay-time='0' hover-class="rankListHover" @tap="torankList">

@@ -1,8 +1,8 @@
-s<style lang="less">
+<style lang="less">
 Page{
   background:linear-gradient(to top,#4076C6,#3A63A2);
 }
-view{
+view,span{
   box-sizing:border-box;
 }
 .bgP{
@@ -11,11 +11,12 @@ view{
   position: fixed;
   top:0;
   left:-100rpx;
-  animation:bgmove 40s infinite alternate;
+  animation:bgmove 30s infinite alternate;
   transition:all 1s 1s;
   transform:scale(1);
   opacity:0;
   z-index:-10;
+  pointer-events:none;
   @keyframes bgmove{
     form{
       transform:scale(1);
@@ -36,8 +37,8 @@ view{
   top:0;
   left:0;
   background-color: #5387AE;
-  transition:all 1s 3s;
-  z-index:99998;
+  z-index:9995;
+  pointer-events:none;
 }
 .hide_loading{
   opacity:0;
@@ -52,26 +53,104 @@ view{
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:99999;
+  z-index:9999;
   pointer-events:none;
   .loadingPic{
     width:180rpx;
     height:180rpx;
     border-radius:100%;
-    transition:all 1s 3s;
   }
   .show_loadingPic{
     transform:translate(0,-499rpx) scale(.8);
   }
 }
+.contentBox{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  overflow:scroll;
+  padding-top:390rpx;
+  .myInfo{
+    width:650rpx;
+    height:300rpx;
+    border-radius:20rpx;
+    background-color: #fff;
+    margin-top:90rpx;
+    position: relative;
+    transform:scale(.7);
+    position: fixed;
+    top:0;
+    left:50rpx;
+    z-index:99;
+    .picBox{
+      position: absolute;
+      top:-72rpx;
+      left:50%;
+      margin-left:-72rpx;
+      width:144rpx;
+      height:144rpx;
+      border-radius:100%;
+      box-shadow:0 0 20rpx rgba(5,33,57,.8);
+    }
+  }
+  .show_picBox{
+    transform:scale(1);
+    box-shadow:0 0 20rpx rgba(8,39,64,.8);
+  }
+  .myInfofull{
+    width:730rpx;
+    height:1000rpx;
+    left:10rpx;
+  }
+  .itemBox{
+    width:650rpx;
+    margin-top:50rpx;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    overflow:scroll;
+    .item{
+      width:250rpx;
+      height:350rpx;
+      background-color: #fff;
+      border-radius:10rpx;
+      margin:30rpx;
+      box-shadow:0 0 20rpx rgba(5,33,57,.8);
+      opacity:0;
+      transform:scale(1.4);
+      overflow:hidden;
+      .itemPic{
+        width:100%;
+        height:100%;
+      }
+    }
+    .show_item{
+      opacity:1;
+      transform:scale(1);
+    }
+  }
+}
 </style>
 <template>
-  <image src='http://ozo44qhh1.bkt.clouddn.com/79553cd09497490f47dd4c202f1dc6c8.jpg' mode="aspectFill" class="bgP {{show_page?'show_page':''}}"></image>
+  <image src='http://ozo44qhh1.bkt.clouddn.com/5922abbd39300.jpg' mode="aspectFill" class="bgP {{show_page?'show_page':''}}"></image>
   <view class="loading">
-    <image src="http://oyu2qzx2v.bkt.clouddn.com/userIcon4.jpg" mode="widthFix" class="loadingPic" style="transform:translate(0,-{{height/2-(90/pxradio)}}px) scale(.8);"></image>
+    <image src="http://oyu2qzx2v.bkt.clouddn.com/userIcon4.jpg" mode="widthFix" class="loadingPic" style="transform:translate(0,-{{height/2-(90/pxradio)}}px) scale(.8);opacity:{{infoOpacity}};transition:all {{page_done?.4:1.4}}s {{page_done?0:3}}s;"></image>
   </view>
-  <view class="loading_view {{show_page?'hide_loading':''}}"></view>
+  <view class="loading_view {{show_page?'hide_loading':''}}" style="transition:all {{page_done?.4:1}}s {{page_done?0:3}}s;"></view>
   <notice :notices="notices"></notice>
+  <view class="contentBox">
+    <!-- 我的基本信息 -->
+    <view class="myInfo {{show_page?'show_picBox':''}} {{myInfofull?'myInfofull':''}}" style="opacity:{{infoOpacity}};transition:all {{page_done?.4:1}}s ease-out {{page_done?0:3.4}}s;" @tap="myInfoTap" transitionend="tranend">
+      <span class="picBox"></span>
+    </view>
+    <!-- 主页列表 -->
+    <view class="itemBox">
+      <view class="item {{show_page?'show_item':''}}" wx:for="{{10}}" style="transition:all .4s {{index*0.2+4.4}}s">
+        <image src="http://ozo44qhh1.bkt.clouddn.com/myicon.png" mode='widthFix' class="itemPic"></image>
+      </view>
+    </view>
+  </view>
 </template>
 <script>
   import wepy from 'wepy'
@@ -99,14 +178,33 @@ view{
         name:'答题DEMO',
         pic:'http://ozo44qhh1.bkt.clouddn.com/datika.png',
         url:'pages/questionanswer/questionAnswer'
+      },{
+        name:'简易音乐',
+        pic:'http://ozo44qhh1.bkt.clouddn.com/music.png',
+        url:'pages/music/music'
       }],
       show_page:false,
       height:null,
-      pxradio:null
+      pxradio:null,
+      scrollTop:0,
+      hidemyinfo:false,
+      infoOpacity:1,
+      page_done:false,
+      myInfofull:false
     }
     events = {
     }
     methods = {
+      myInfoTap(){
+        this.myInfofull=!this.myInfofull
+        this.$apply()
+        console.log("asd")
+      },
+      tranend(){
+        this.page_done=true
+        this.$apply()
+        console.log('动画结束')
+      }
     }
     async onShow(){
       this.show_page=true
@@ -138,6 +236,11 @@ view{
           path: ''
         }
       }
+    }
+    onPageScroll(e){
+      this.infoOpacity=1-e.scrollTop*0.005;
+      this.page_done=true
+      this.$apply()
     }
 }
 </script>

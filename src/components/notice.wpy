@@ -1,13 +1,13 @@
 <style lang="less">
 .noticeBox{
-
+  pointer-events:none;
   .movableArea{
     width:99%;
     height:90%;
     position: fixed;
     top:0;
     left:0;
-    z-index:99997;
+    z-index:9990;
     .movableView{
       width:100rpx;
       height:100rpx;
@@ -24,6 +24,7 @@
         transform:scale(0.9) rotateZ(90deg);
         opacity:0;
         padding:20rpx;
+        pointer-events:auto;
       }
       .show_notice{
         transform:scale(1) rotateZ(0);
@@ -37,7 +38,7 @@
     position: fixed;
     top:0;
     left:0;
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(0,0,0,.8);
     z-index:99998;
     transition:all .4s;
     pointer-events:none;
@@ -87,16 +88,16 @@
       }
       @keyframes noticeMove{
         0%{
-          transform:rotateZ(20deg);
+          transform:rotateZ(30deg);
         }
-        7%{
-          transform:rotateZ(20deg);
+        2%{
+          transform:rotateZ(30deg);
         }
-        93%{
-          transform:rotateZ(-20deg);
+        98%{
+          transform:rotateZ(-30deg);
         }
         100%{
-          transform:rotateZ(-20deg);
+          transform:rotateZ(-30deg);
         }
       }
     }
@@ -185,6 +186,9 @@
       },
       itemtap(url){
         apis.navTo(url)
+        this.show_noticeBtn=true
+        this.show_content=false
+        this.$apply()
       }
     }
     onLoad(){

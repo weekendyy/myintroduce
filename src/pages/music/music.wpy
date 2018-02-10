@@ -1,0 +1,232 @@
+<style lang="less">
+Page{
+  width:100%;
+  height:100%;
+  background-color: #fff;
+}
+.readBox{
+  width:100%;
+  display: flex;
+  flex-direction:column;
+  align-items:center;
+
+  .readPic{
+    margin-top:20rpx;
+    width:650rpx;
+    height:550rpx;
+    box-shadow:0 0 20rpx rgba(52,61,70,.3);
+    border-radius:10rpx;
+  }
+  .playBox{
+    width:100%;
+    margin-top:30rpx;
+    .progress{
+      width:100%;
+      height:60rpx;
+      display: flex;
+      justify-content:space-between;
+      align-items:center;
+      box-sizing:border-box;
+      padding:0 40rpx;
+      font-size:27rpx;
+      color:#696969;
+      span{
+        font-size:25rpx;
+        color:#929091;
+      }
+      slider{
+        width:450rpx;
+      }
+    }
+    .playControls{
+      width:100%;
+      height:170rpx;
+      display: flex;
+      justify-content:center;
+      align-items:center;
+      position: relative;
+      box-sizing:border-box;
+      
+      .controlImgBox{
+      }
+      .controlImgBoxPlay{
+        width:120rpx;
+        height:120rpx;
+        border-radius:100%;
+      }
+      .controllHover{
+        background-color: #0F520F;
+      }
+      .play{
+        width:120rpx;
+        height:120rpx;
+        margin:0 70rpx;
+        border-radius:100%;
+        box-shadow:0 0 20rpx rgba(10,64,44,.3);
+      }
+      .palyBox1{
+        transition:all .4s;
+      }
+      .palyHover{
+        transform:scale(1.1);
+      }
+      .prev{
+        width:70rpx;
+        height:70rpx;
+
+      }
+      .next{
+        width:70rpx;
+        height:70rpx;
+      }
+      .playMode{
+        width:55rpx;
+        height:55rpx;
+        position: absolute;
+        right:40rpx;
+        top:57rpx;
+        padding:0;
+        background-color: #fff;
+        border-radius:none;
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="readBox">
+    <audio  src="{{audioSrc}}" id="myAudio" ></audio>
+    <image src="http://oyu2qzx2v.bkt.clouddn.com/readPic.jpg" mode="widthFix" class="readPic"></image>
+    <view class="playBox">
+      <view class="progress">
+        <span>{{currentMin}}:{{currentSec}}</span>
+        <slider max="{{timeAll*100}}" value="{{currentTime*100}}" activeColor="#B7D5C9" @change="sliderchange" @changing="sliderchanging"></slider>
+        <span>{{min}}:{{second}}</span>
+      </view>
+      <view class="playControls">
+          <image src="http://oyu2qzx2v.bkt.clouddn.com/skip-previous.png" mode="aspectFill" class="prev"></image>
+          <view class="palyBox1" hover-class="palyHover" hover-start-time="0" hover-stay-time="200">
+            <image src="{{isPlay?'http://oyu2qzx2v.bkt.clouddn.com/pausedes.png':'http://oyu2qzx2v.bkt.clouddn.com/plays.png'}}" mode="aspectFill" class="play" @tap="playTap"></image>
+          </view>
+          <image src="http://oyu2qzx2v.bkt.clouddn.com/skip-next.png" mode="aspectFill" class="next"></image>
+        <!-- <image src="http://oyu2qzx2v.bkt.clouddn.com/loop.png" mode="aspectFill" class="playMode"></image> -->
+      </view>
+    </view>
+  </view>
+  <loading></loading> 
+</template>
+<script>
+/* eslint-disable */
+    import wepy from 'wepy';
+    import * as apis from '../../api/api.js'
+    import _isEmpty from 'lodash/isEmpty'
+    import interfaces from '../../interfaces'
+    import loading from '../../components/loading'
+    export default class Index extends wepy.page {
+        config = {
+          navigationBarTitleText: '',
+          backgroundColor:'#fff',
+          enablePullDownRefresh: false
+        }
+        components = {
+          loading
+        };
+        data = {
+            isPlay:false,
+            audioSrc:"http://oyu2qzx2v.bkt.clouddn.com/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E4%B8%9C%E9%A3%8E%E7%A0%B4.mp3",
+            audioCtx:'',
+            innerAudioContext:'',
+            timeAll:'',
+            second:'',
+            min:'',
+            currentTime:'',
+            currentMin:'00',
+            currentSec:'00',
+            sliding:false
+        };
+
+        methods = {
+          playTap(){
+            this.isPlay=!this.isPlay;
+            if(this.isPlay){
+              this.innerAudioContext.play()
+              this.innerAudioContext.onPlay(()=>{
+                this.updateTime()
+              })
+            }else{
+              this.innerAudioContext.pause()
+            }
+          },
+          sliderchange(e){
+            this.innerAudioContext.seek(e.detail.value/100)
+            this.sliding=false
+            this.$apply()
+          },
+          sliderchanging(e){
+            this.sliding=true
+            this.$apply()
+            this.currentMin=parseInt((e.detail.value/100)/60)
+            if(this.currentMin.toString().length==1){
+              this.currentMin="0"+this.currentMin
+              this.$apply()
+            }
+            this.currentSec=parseInt((e.detail.value/100))%60
+            if(this.currentSec.toString().length==1){
+              this.currentSec="0"+this.currentSec
+              this.$apply()
+            }
+            this.$apply()
+          }
+        };
+        events={
+        }
+        onReady(){
+          this.innerAudioContext = wx.createInnerAudioContext()
+          this.innerAudioContext.src = this.audioSrc
+          let timer=setInterval(()=>{
+            if(!this.second){
+              let timedur=parseInt(this.innerAudioContext.duration)
+              this.timeAll=timedur
+              this.min=parseInt(timedur/60)
+              if(this.min.toString().length==1){
+                this.min="0"+this.min
+                this.$apply()
+              }
+              this.second=timedur%60
+              if(this.second.toString().length==1&&this.second!=0){
+                this.second="0"+this.second
+                this.$apply()
+              }
+              this.$apply()
+            }else{
+              clearInterval(timer)
+            }
+          },500)
+        }
+        async onLoad(e){
+          let self=this
+          setTimeout(()=>{
+            self.$broadcast('hideLoading')
+          },3000)
+        }
+        updateTime(){
+          this.innerAudioContext.onTimeUpdate(()=>{
+            if(!this.sliding){
+              this.currentTime =this.innerAudioContext.currentTime
+              this.$apply()
+              this.currentMin=parseInt(this.currentTime/60)
+              if(this.currentMin.toString().length==1){
+                this.currentMin="0"+this.currentMin
+                this.$apply()
+              }
+              this.currentSec=parseInt(this.currentTime)%60
+              if(this.currentSec.toString().length==1){
+                this.currentSec="0"+this.currentSec
+                this.$apply()
+              }
+              this.$apply()
+            }
+          })
+        }
+    }
+</script>

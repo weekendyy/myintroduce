@@ -1,0 +1,85 @@
+<style lang="less">
+.loadingBox{
+  .loading{
+    width:100%;
+    height:100%;
+    position: fixed;
+    top:0;
+    left:0;
+    background-color: #B7C4D7;
+    transition:all .4s;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:99999;
+    .loading_txt{
+      margin-top:20rpx;
+      color:#fff;
+    }
+    .loading_w{
+      width:100rpx;
+      height:100rpx;
+      border-radius:100%;
+      background-color: #fff;
+      animation:loadingmove 1s linear infinite;
+      .loading_l{
+        width:100%;
+        height:100%;
+        border-radius:100%;
+        background-color: #B7C4D7;
+        margin-left:9rpx;
+        display:block;
+      }
+    }
+    @keyframes loadingmove{
+      from {
+        transform:rotateZ(0);
+      }
+      to{
+        transform:rotateZ(360deg);
+      }
+    }
+  }
+  .hide_loading{
+    opacity:0;
+    pointer-events:none;
+  }
+}
+</style>
+<template>
+  <view class="loadingBox">
+    <view class="loading {{show_page?'hide_loading':''}}">
+      <view class="loading_w">
+        <span class="loading_l"></span>
+      </view>
+      <span class="loading_txt">加载中...</span>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import * as apis from '../api/api.js'
+  export default class loading extends wepy.component {
+    props = {
+    }
+    components = {
+    }
+    data = {
+      show_page:false
+    }
+    events={
+      hideLoading(){
+        this.show_page=true
+        this.$apply()
+      }
+    }
+    methods = {
+
+    }
+    onLoad(){
+    
+    }
+}
+</script>
+
